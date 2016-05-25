@@ -61,6 +61,7 @@
   "dependencies": {
     "@google/cloud-diagnostics-common": "git+https://github.com/cristiancavalli/cloud-diagnostics-common-nodejs.git#throwaway/grpc-client",
     "acorn": "^2.7.0",
+    "benchmark": "^2.1.0",
     "coffee-script": "^1.9.3",
     "dorusu": "^0.4.0",
     "findit": "^2.0.0",
