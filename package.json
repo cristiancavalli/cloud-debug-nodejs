@@ -60,9 +60,9 @@
   },
   "dependencies": {
     "@google/cloud-diagnostics-common": "git+https://github.com/cristiancavalli/cloud-diagnostics-common-nodejs.git#throwaway/grpc-client",
-    "dorusu": "git+https://github.com/google/dorusu-js.git",
     "acorn": "^2.7.0",
     "coffee-script": "^1.9.3",
+    "dorusu": "^0.4.0",
     "findit": "^2.0.0",
     "google-auth-library": "^0.9.8",
     "grpc": "^0.14.1",
