@@ -53,6 +53,7 @@ var initChain = function ( callback ) {
     endTime = Date.now()
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log("!! Request chain completed in (ms):", (endTime-startTime));
+    console.log("!! Requests completed:", MAX_NUMBER_REQUESTS);
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     return ;
