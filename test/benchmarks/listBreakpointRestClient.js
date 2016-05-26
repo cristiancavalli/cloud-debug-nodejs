@@ -37,7 +37,7 @@ var makeRequest = function ( callback ) {
         "# Got response on iteration:"
         , i
         , "\n\t"
-        , "time elapsed:"
+        , "time elapsed (ms):"
         , (requestEndTime-requestStartTime)
       );
       i += 1;
