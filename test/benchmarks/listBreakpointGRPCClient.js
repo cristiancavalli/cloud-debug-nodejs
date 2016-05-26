@@ -25,7 +25,7 @@ var SourceBuilder = builder.google.devtools.source.v1;
 
 // build the client from the protobuf definition
 var client = buildClient(Controller2.client);
-//
+// create a client from the derived factory
 var controller = new client({
   host: 'localhost'
   , plain: true
