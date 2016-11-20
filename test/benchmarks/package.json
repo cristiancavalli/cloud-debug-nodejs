@@ -1,0 +1,16 @@
+{
+  "name": "debug_sample_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    	"start": "GCLOUD_DEBUG_LOGLEVEL=4 GCLOUD_PROJECT=ccavalli-test-debug-external node server.js",
+	"test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CRISTIAN CAVALLI",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@google/cloud-debug": "git+https://github.com/cristiancavalli/cloud-debug-nodejs.git#throwaway/grpc-client",
+    "grpc": "^0.14.1"
+  }
+}
