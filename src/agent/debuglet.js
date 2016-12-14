@@ -23,7 +23,7 @@ var util = require('util');
 var semver = require('semver');
 
 var v8debugapi = require('./v8debugapi.js');
-var DebugletApi = require('../debugletapi.js');
+var DebugletApi = require('../controller.js');
 var scanner = require('./scanner.js');
 var Logger = require('@google/cloud-diagnostics-common').logger;
 var StatusMessage = require('../apiclasses.js').StatusMessage;

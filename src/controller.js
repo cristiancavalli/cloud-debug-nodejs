@@ -37,7 +37,7 @@ var API = 'https://clouddebugger.googleapis.com/v2/controller';
 /**
  * @constructor
  */
-function DebugletApi(config, debug) {
+function Controller(config, debug) {
   config = config || {};
 
   /** @priavate {Debug} */
@@ -68,7 +68,7 @@ function DebugletApi(config, debug) {
  * @param {Logger} logger a logger
  * @param {!function(?Error)} callback
  */
-DebugletApi.prototype.init = function(uid, logger, callback) {
+Controller.prototype.init = function(uid, logger, callback) {
   var that = this;
   that.uid_ = uid;
   that.nextWaitToken_ = null;
@@ -105,7 +105,7 @@ DebugletApi.prototype.init = function(uid, logger, callback) {
  * Register to the API
  * @param {!function(?Error,Object=)} callback
  */
-DebugletApi.prototype.register = function(callback) {
+Controller.prototype.register = function(callback) {
   this.register_(null, callback);
 };
 
@@ -114,7 +114,7 @@ DebugletApi.prototype.register = function(callback) {
  * Register an error to the API
  * @param {!string} errorMessage to be reported to the Debug API
  */
-DebugletApi.prototype.registerError = function(message) {
+Controller.prototype.registerError = function(message) {
   this.register_(message, function() {});
 };
 
@@ -126,7 +126,7 @@ DebugletApi.prototype.registerError = function(message) {
  * @param {!function(?Error,Object=)} callback
  * @private
  */
-DebugletApi.prototype.register_ = function(errorMessage, callback) {
+Controller.prototype.register_ = function(errorMessage, callback) {
   var that = this;
 
   var cwd = process.cwd();
@@ -214,7 +214,7 @@ DebugletApi.prototype.register_ = function(errorMessage, callback) {
  * Fetch the list of breakpoints from the server. Assumes we have registered.
  * @param {!function(?Error,Object=,Object=)} callback accepting (err, response, body)
  */
-DebugletApi.prototype.listBreakpoints = function(callback) {
+Controller.prototype.listBreakpoints = function(callback) {
   var that = this;
   assert(that.debuggeeId_, 'should register first');
   var query = { success_on_timeout: true };
@@ -250,7 +250,7 @@ DebugletApi.prototype.listBreakpoints = function(callback) {
  * @param {!Breakpoint} breakpoint
  * @param {!Function} callback accepting (err, body)
  */
-DebugletApi.prototype.updateBreakpoint =
+Controller.prototype.updateBreakpoint =
   function(breakpoint, callback) {
     assert(this.debuggeeId_, 'should register first');
 
@@ -280,4 +280,4 @@ DebugletApi.prototype.updateBreakpoint =
     }
   };
 
-module.exports = DebugletApi;
+module.exports = Controller;

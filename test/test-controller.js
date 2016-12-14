@@ -30,7 +30,7 @@ delete process.env.GCLOUD_PROJECT;
 var utils = {
   getProjectNumber: function(callback) { callback(null, 'project123'); }
 };
-var DebugletApi = proxyquire('../src/debugletapi.js', {
+var DebugletApi = proxyquire('../src/controller.js', {
   '@google/cloud-diagnostics-common': {
     logger: null,
     utils: utils
