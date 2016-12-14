@@ -137,11 +137,10 @@ Debug.prototype.getProjectId = function(callback) {
 // /**
 //  * Creates a controller service object.
 //  *
-//  * @param {string}
 //  * @private
 //  */
 // Debug.prototype.controller = function() {
 //   return new Controller(this);
-// }
+// };
 
 module.exports = Debug;

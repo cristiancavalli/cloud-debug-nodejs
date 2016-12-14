@@ -16,6 +16,10 @@
 
 'use strict';
 
+/*!
+ * @module debug/controller
+ */
+
 var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
@@ -23,7 +27,7 @@ var crypto = require('crypto');
 var pjson = require('../package.json');
 var qs = require('querystring');
 var utils = require('@google/cloud-diagnostics-common').utils;
-var StatusMessage = require('./apiclasses.js').StatusMessage;
+var StatusMessage = require('./status-message.js');
 
 /** @const {string} Cloud Debug API endpoint */
 var API = 'https://clouddebugger.googleapis.com/v2/controller';

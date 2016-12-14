@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-// Classes corresponding to the Cloud Debuglet API
-
 'use strict';
-
-module.exports = {
-  StatusMessage: StatusMessage
-};
 
 /**
  * Status Message to be sent to the server
@@ -41,3 +35,5 @@ function StatusMessage(refersTo, description, isError) {
 /** @const */ StatusMessage.BREAKPOINT_EXPRESSION = 'BREAKPOINT_EXPRESSION';
 /** @const */ StatusMessage.VARIABLE_NAME = 'VARIABLE_NAME';
 /** @const */ StatusMessage.VARIABLE_VALUE = 'VARIABLE_VALUE';
+
+module.exports = StatusMessage;
