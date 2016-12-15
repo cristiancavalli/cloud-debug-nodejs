@@ -45,8 +45,8 @@ describe('Debuggee', function() {
     });
     assert.ok(debuggee);
     assert.ok(debuggee.labels);
-    assert.equal(debuggee.labels.module, 'some-service');
-    assert.equal(debuggee.labels.version, 'production');
+    assert.strictEqual(debuggee.labels.module, 'some-service');
+    assert.strictEqual(debuggee.labels.version, 'production');
   });
 
   it('should not add a module label when service is default', function() {
@@ -54,8 +54,8 @@ describe('Debuggee', function() {
                                 {service: 'default', version: 'yellow.5'});
     assert.ok(debuggee);
     assert.ok(debuggee.labels);
-    assert.equal(debuggee.labels.module, undefined);
-    assert.equal(debuggee.labels.version, 'yellow.5');
+    assert.strictEqual(debuggee.labels.module, undefined);
+    assert.strictEqual(debuggee.labels.version, 'yellow.5');
   });
 
   it('should have an error statusMessage with the appropriate arg', function() {
