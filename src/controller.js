@@ -21,22 +21,13 @@
  */
 
 var fs = require('fs');
-var path = require('path');
 var assert = require('assert');
-var crypto = require('crypto');
-var pjson = require('../package.json');
 var qs = require('querystring');
 var utils = require('@google/cloud-diagnostics-common').utils;
-var StatusMessage = require('./status-message.js');
+var Debuggee = require('./debuggee.js');
 
 /** @const {string} Cloud Debug API endpoint */
 var API = 'https://clouddebugger.googleapis.com/v2/controller';
-
-/* c.f. the Java Debugger agent */
-/** @const {string} */ var DEBUGGEE_MODULE_LABEL = 'module';
-/** @const {string} */ var DEBUGGEE_MAJOR_VERSION_LABEL = 'version';
-/** @const {string} */ var DEBUGGEE_MINOR_VERSION_LABEL = 'minorversion';
-
 
 /**
  * @constructor
@@ -132,64 +123,10 @@ Controller.prototype.registerError = function(message) {
  */
 Controller.prototype.register_ = function(errorMessage, callback) {
   var that = this;
-
-  var cwd = process.cwd();
-  var mainScript = path.relative(cwd, process.argv[1]);
-
-  var version = 'google.com/node-' +
-    (that.onGCP ? 'gcp' : 'standalone') +
-    '/v' + pjson.version;
-  var desc = process.title + ' ' + mainScript;
-  var labels = {
-    'main script': mainScript,
-    'process.title': process.title,
-    'node version': process.versions.node,
-    'V8 version': process.versions.v8,
-    'agent.name': pjson.name,
-    'agent.version': pjson.version,
-    'projectid': that.project_
-  };
-
-  var serviceName = that.serviceName_;
-  if (serviceName) {
-    desc += ' module:' + serviceName;
-    labels[DEBUGGEE_MODULE_LABEL] = serviceName;
-  }
-
-  var serviceVersion = that.serviceVersion_;
-  if (serviceVersion) {
-    desc += ' version:' + serviceVersion;
-    if (serviceVersion !== 'default') {
-      labels[DEBUGGEE_MAJOR_VERSION_LABEL] = serviceVersion;
-    }
-  }
-
-  var descriptor = that.descriptor_;
-  if (descriptor) {
-    desc += ' description:' + descriptor;
-  }
-
-  if (process.env.GAE_MINOR_VERSION) {
-    labels[DEBUGGEE_MINOR_VERSION_LABEL] = process.env.GAE_MINOR_VERSION;
-  }
-
-  var uniquifier = desc + version + that.uid_ + that.sourceContext_ +
-    JSON.stringify(labels);
-  uniquifier  = crypto.createHash('sha1').update(uniquifier).digest('hex');
-
-  var debuggee = {
-    project: that.project_,
-    uniquifier: uniquifier,
-    description: desc,
-    agentVersion: version,
-    labels: labels,
-    sourceContexts: [that.sourceContext_]
-  };
-
-  if (errorMessage) {
-    debuggee.status = new StatusMessage(StatusMessage.UNSPECIFIED, errorMessage,
-                                        true);
-  }
+  var debuggee = new Debuggee(
+      that.project_, that.uid_,
+      {service: that.serviceName_, version: that.serviceVersion_},
+      that.sourceContext_, that.descriptor_, errorMessage, that.onGCP);
 
   var options = {
     uri: API + '/debuggees/register',

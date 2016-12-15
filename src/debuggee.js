@@ -38,12 +38,14 @@ var StatusMessage = require('./status-message.js');
  *     debuggable instance. This is useful if we have a problem starting the
  *     debugger support, and want to report to the API so that the users has a
  *     way of noticing.
+ * @param {?boolean} onGCP - set to true when the debuggee is running inside
+ *     Google Cloud Platform.
  */
 function Debuggee(projectId, uid, serviceContext, sourceContext, description,
-                  errorMessage) {
+                  errorMessage, onGCP) {
   if (!(this instanceof Debuggee)) {
     return new Debuggee(projectId, uid, serviceContext, sourceContext,
-                        description, errorMessage);
+                        description, errorMessage, onGCP);
   }
 
   if (typeof projectId !== 'string') {
@@ -56,7 +58,8 @@ function Debuggee(projectId, uid, serviceContext, sourceContext, description,
   var cwd = process.cwd();
   var mainScript = path.relative(cwd, process.argv[1]);
 
-  var version = 'google.com/' + pjson.name + '/v' + pjson.version;
+  var version = 'google.com/node-' + (onGCP ? 'gcp' : 'standalone') + '/v' +
+                pjson.version;
   var desc = process.title + ' ' + mainScript;
 
   var labels = {
