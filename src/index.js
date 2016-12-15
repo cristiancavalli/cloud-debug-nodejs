@@ -114,33 +114,4 @@ Debug.prototype.startAgent = function(config) {
   }
 };
 
-/**
- * Attempt to retrieve the project ID from the auth client.
- *
- * @param {function} callback - The callback function.
- */
-Debug.prototype.getProjectId = function(callback) {
-  if (global.GCLOUD_SANDBOX_ENV) {
-    return;
-  }
-
-  var self = this;
-  if (this.projectId) {
-    setImmediate(function() { callback(null, self.projectId); });
-    return;
-  }
-
-  this.authClient.getProjectId(callback);
-};
-
-// var Controller = require('./controller.js');
-// /**
-//  * Creates a controller service object.
-//  *
-//  * @private
-//  */
-// Debug.prototype.controller = function() {
-//   return new Controller(this);
-// };
-
 module.exports = Debug;

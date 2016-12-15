@@ -19,6 +19,7 @@ var crypto = require('crypto');
 var path = require('path');
 var pjson = require('../package.json');
 var StatusMessage = require('./status-message.js');
+var _ = require('lodash');
 
 /**
  * Creates a Debuggee service object.
@@ -48,10 +49,10 @@ function Debuggee(projectId, uid, serviceContext, sourceContext, description,
                         description, errorMessage, onGCP);
   }
 
-  if (typeof projectId !== 'string') {
+  if (!_.isString(projectId)) {
     throw new Error('projectId must be a string');
   }
-  if (typeof uid !== 'string') {
+  if (!_.isString(uid)) {
     throw new Error('uid must be a string');
   }
 
@@ -73,7 +74,7 @@ function Debuggee(projectId, uid, serviceContext, sourceContext, description,
   };
 
   if (serviceContext) {
-    if (typeof serviceContext.service === 'string' &&
+    if (_.isString(serviceContext.service) &&
         serviceContext.service !== 'default') {
       // As per app-engine-ids, the module label is not reported
       // when it happens to be 'default'.
@@ -81,7 +82,7 @@ function Debuggee(projectId, uid, serviceContext, sourceContext, description,
       desc += ' module:' + serviceContext.service;
     }
 
-    if (typeof serviceContext.version === 'string') {
+    if (_.isString(serviceContext.version)) {
       labels.version = serviceContext.version;
       desc += ' version:' + serviceContext.version;
     }

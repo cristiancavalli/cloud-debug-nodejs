@@ -26,13 +26,6 @@ assert.ok(
         'along with valid application default credentials to be able to run this ' +
         'test');
 var config = {};
-// assert.ok(process.env.GCLOUD_TESTS_PROJECT_ID);
-// assert.ok(process.env.GCLOUD_TESTS_KEY);
-// var config = {
-//   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
-//   keyFilename: process.env.GCLOUD_TESTS_KEY
-// }
-
 
 var debug = require('../')(config);
 var DebugletApi = require('../src/controller.js');
